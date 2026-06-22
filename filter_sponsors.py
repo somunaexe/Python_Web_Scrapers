@@ -26,8 +26,7 @@ from datetime import date
 
 # Official Home Office CSV (updates roughly monthly — re-run to refresh)
 GOV_UK_CSV_URL = (
-    "https://assets.publishing.service.gov.uk/media/"
-    "Worker_and_Temporary_Worker.csv"
+    "https://assets.publishing.service.gov.uk/media/6a3917a2c6e94f095f3efb8c/2026-06-22_-_Worker_and_Temporary_Worker.csv"
 )
 
 # Fallback: if the URL above changes, go to:
@@ -120,7 +119,7 @@ def filter_tech_sponsors(df: pd.DataFrame) -> pd.DataFrame:
 
     # 2. A-rated only (not B-rated / suspended)
     if col_rating:
-        df = df[df[col_rating].str.upper().str.startswith("A", na=False)]
+        df = df[df[col_rating].str.lower().str.contains("a rating", na=False)]
         print(f"  → {len(df):,} after filtering for A-rating")
 
     # 3. Tech company name match
